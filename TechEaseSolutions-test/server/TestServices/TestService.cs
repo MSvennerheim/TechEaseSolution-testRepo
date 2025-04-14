@@ -38,15 +38,16 @@ public class TestService : IDisposable
       return ""; // if nothing is found. Shouldn't happen but who knows
    }
 
-   public async Task MakeTicketForTest()
+   public async Task MakeTicketForTest(string email, string issue, string text)
    {
       Ticket ticketInformation = new();
-      
+      ticketInformation.email = email;
+      ticketInformation.option = issue;
+      ticketInformation.description = text;
       
       await queries.CompanyName(ticketInformation);
       await queries.customerTempUser(ticketInformation);
       await queries.postNewTicket(ticketInformation);
-      
    }
    
    public void Dispose()
