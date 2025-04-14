@@ -21,7 +21,7 @@ public class TestService : IDisposable
 
    public async Task<string?> GetChatIdForCustomerLogin(string company, string message, string email)
    {
-      string jsonResponse = Convert.ToString(await queries.GetChatsForCsRep(company, true, false));
+      string jsonResponse = await queries.GetChatsForCsRep(company, true, false);
 
       using (JsonDocument messages = JsonDocument.Parse(jsonResponse))
       {
