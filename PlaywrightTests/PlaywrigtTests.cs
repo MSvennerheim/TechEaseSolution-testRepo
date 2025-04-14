@@ -108,13 +108,10 @@ public class PlaywrigtTests
     [Given(@"I have submitted a form, with relevant info, ""(.*)"", ""(.*)"", ""(.*)"" and ""(.*)""")]
     public async Task GivenIHaveSubmittedAFormWithRelevantInfo(string company, string email, string issue, string text)
     {
-        await GivenIAmOnFormPage(company);
-        await WhenISelectFromTheIssueDropdown(issue);
-        await WhenIInputInTheEmailTextbox(email);
-        await WhenIInputInTheDescriptionTextbox(text);
-        await WhenISubmitTheForm();
-
+        
+        
         chatId = await _testService.GetChatIdForCustomerLogin(company, text, email);
+        
         if (chatId == "")
         {
             Assert.Fail();
