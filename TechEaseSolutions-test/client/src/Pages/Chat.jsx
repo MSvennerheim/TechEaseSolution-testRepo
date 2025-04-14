@@ -2,7 +2,7 @@ import React, {use, useEffect, useState} from "react";
 import { useParams } from "react-router-dom";
 import { useSendChatAnswer } from "../Components/ChatAnswer.jsx";
 import {useNavigate} from "react-router";
-import '../styles/Chat.css';
+import '../Styles/Chat.css';
 
 const ChatHistory = () => {
   const { chatId } = useParams();
