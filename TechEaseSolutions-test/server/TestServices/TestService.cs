@@ -31,7 +31,7 @@ public class TestService : IDisposable
          {
             if (chat.GetProperty("sender").GetString() == email && chat.GetProperty("message").GetString() == message)
             {
-               return chat.GetProperty("chatid").ToString();
+               return chat.GetProperty("chat").ToString();
             }
          }
       }
