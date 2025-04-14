@@ -22,7 +22,7 @@ jobs:
       - name: Install dotnet project dependencies
         run: cd TechEaseSolutions-test && dotnet restore
       - name: Build frontend
-        run: cd TechEaseSolutions-test/client && npm install && npm build
+        run: cd TechEaseSolutions-test/client && npm install && npm run build
       - name: Build/Restore Playwright Project
         run: cd PlaywrightTests && dotnet build
       - name: Ensure browsers are installed
