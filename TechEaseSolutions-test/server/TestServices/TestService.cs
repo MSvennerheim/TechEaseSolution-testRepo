@@ -29,7 +29,7 @@ public class TestService : IDisposable
 
          foreach (var chat in root.EnumerateArray())
          {
-            if (chat.GetProperty("email").GetString() == email && chat.GetProperty("message").GetString() == message)
+            if (chat.GetProperty("sender").GetString() == email && chat.GetProperty("message").GetString() == message)
             {
                return chat.GetProperty("chatid").ToString();
             }
