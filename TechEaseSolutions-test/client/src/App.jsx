@@ -5,9 +5,9 @@ import Adminsida from "./Pages/adminsida.jsx";
 import Arbetarsida from "./Pages/arbetarsida.jsx";
 import KontaktaOss from "./Pages/kontaktaoss.jsx";
 import Confirmationsida from "./Pages/confirmationsida.jsx";
-import ChatHistory from "./pages/Chat.jsx"
+import ChatHistory from "./Pages/Chat.jsx"
 import PasswordresetForm from "./Pages/PasswordresetForm.jsx";
-import EditForm from "./pages/CaseEditor.jsx";
+import EditForm from "./Pages/CaseEditor.jsx";
 import './index.css';
 import ProtectedRoute from './Components/ProtectedRoute.jsx';
 import CustomerLogin from "./Components/CustomerLogin.jsx";
