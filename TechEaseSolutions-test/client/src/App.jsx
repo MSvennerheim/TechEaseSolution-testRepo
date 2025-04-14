@@ -1,9 +1,9 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Login from './Pages/LoginUI.jsx';
 import Redigeramedarbetare from './Pages/redigeramedarbetare.jsx';
-import Adminsida from "./Pages/Adminsida.jsx";
+import Adminsida from "./Pages/adminsida.jsx";
 import Arbetarsida from "./Pages/arbetarsida.jsx";
-import KontaktaOss from "./Pages/Kontaktaoss.jsx";
+import KontaktaOss from "./Pages/kontaktaoss.jsx";
 import Confirmationsida from "./Pages/confirmationsida.jsx";
 import ChatHistory from "./pages/Chat.jsx"
 import PasswordresetForm from "./Pages/PasswordresetForm.jsx";
