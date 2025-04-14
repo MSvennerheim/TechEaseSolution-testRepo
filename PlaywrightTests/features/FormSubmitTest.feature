@@ -1,7 +1,7 @@
 Feature: Submit form to company
     
 Scenario Outline: Submit form
-    Given I am on <company> form page
+    Given I am on "<company>" form page
     When I input "<email>" in the email textbox
     And I select "<issue>" from the issue dropdown
     And I input "<text>" in the description textbox

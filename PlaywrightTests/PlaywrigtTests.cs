@@ -82,7 +82,7 @@ public class PlaywrigtTests
     [Given(@"I am on the loggin page")]
     public async Task GivenIAmOnTheLogginPage()
     {
-        await _page.GotoAsync("http://localhost:5000/", new() { WaitUntil = WaitUntilState.NetworkIdle });
+        await _page.GotoAsync("http://localhost:5000/");
     }
 
     [When(@"I input ""(.*)"" in the password textbox")]
@@ -96,11 +96,11 @@ public class PlaywrigtTests
     {
         if (role == "admin")
         {
-            await _page.WaitForURLAsync(url => url.Contains("admin"), new() { WaitUntil = WaitUntilState.NetworkIdle });
+            await _page.WaitForURLAsync(url => url.Contains("admin"));
         }
         else
         {
-            await _page.WaitForURLAsync(url => url.Contains("arbetarsida"), new() { WaitUntil = WaitUntilState.NetworkIdle });
+            await _page.WaitForURLAsync(url => url.Contains("arbetarsida"));
         }
     }
 
@@ -128,14 +128,16 @@ public class PlaywrigtTests
     [When(@"I click on the loggin link")]
     public async Task WhenIClickOnTheLogginLink()
     {
-        await _page.GotoAsync($"http://localhost:5000/guestlogin/{validChatLinkForLogin}", new() { WaitUntil = WaitUntilState.NetworkIdle });
+        await _page.GotoAsync($"http://localhost:5000/guestlogin/{validChatLinkForLogin}");
     }
 
 
     [Then(@"I should see my chat with my submitted ""(.*)""")]
     public async Task ThenIShouldSeeMyChatWithMySubmitted(string text)
     {
-        await _page.WaitForURLAsync($"http://localhost:5000/chat/{chatId}", new() { WaitUntil = WaitUntilState.NetworkIdle });
+        await _page.WaitForURLAsync($"http://localhost:5000/chat/{chatId}");
         Assert.NotNull(_page.Locator($"text={text}"));
     }
+
+   
 }
