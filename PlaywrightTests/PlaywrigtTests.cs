@@ -8,7 +8,7 @@ namespace PlaywrightTests;
 [Binding]
 public class PlaywrigtTests
 {
-    //private TestService _testService;
+    private TestService _testService;
     
     private IPlaywright _playwright;
     private IBrowser _browser;
@@ -25,7 +25,7 @@ public class PlaywrigtTests
         _browser = await _playwright.Chromium.LaunchAsync(new() { Headless = true, SlowMo = 200 });
         _context = await _browser.NewContextAsync();
         _page = await _context.NewPageAsync();
-        //_testService = new TestService();
+        _testService = new TestService();
     }
 
     [AfterScenario]
@@ -33,7 +33,7 @@ public class PlaywrigtTests
     {
         await _browser.CloseAsync();
         _playwright.Dispose();
-        //(_testService as IDisposable)?.Dispose();
+        (_testService as IDisposable)?.Dispose();
     }
 
     [Given(@"I am on ""(.*)"" form page")]
@@ -114,7 +114,7 @@ public class PlaywrigtTests
         await WhenIInputInTheDescriptionTextbox(text);
         await WhenISubmitTheForm();
 
-        //chatId = await _testService.GetChatIdForCustomerLogin(company, text, email);
+        chatId = await _testService.GetChatIdForCustomerLogin(company, text, email);
         if (chatId == "")
         {
             Assert.Fail();

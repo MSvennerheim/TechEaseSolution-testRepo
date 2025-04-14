@@ -28,6 +28,6 @@ jobs:
       - name: Start server
         run: cd TechEaseSolutions-test/server && nohup dotnet run &
       - name: Run GUI-tests
-        run: cd ShopTester.Tests && dotnet test
+        run: cd PlaywrightTests && dotnet test
 
 
