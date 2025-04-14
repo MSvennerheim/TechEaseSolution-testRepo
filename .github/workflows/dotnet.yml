@@ -21,6 +21,10 @@ jobs:
           dotnet-version: 8.0.x
       - name: Install dotnet project dependencies
         run: cd TechEaseSolutions-test && dotnet restore
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
       - name: Build/Restore Playwright Project
         run: cd PlaywrightTests && dotnet build
       - name: Ensure browsers are installed
