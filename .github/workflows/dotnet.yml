@@ -28,7 +28,7 @@ jobs:
       - name: Ensure browsers are installed
         run: cd PlaywrightTests && pwsh bin/Debug/net8.0/playwright.ps1 install --with-deps
       - name: Start server
-        run: cd TechEaseSolutions-test/server && nohup dotnet run
+        run: cd TechEaseSolutions-test/server && nohup dotnet run &
       - name: Run GUI-tests
         run: cd PlaywrightTests && dotnet test
 
