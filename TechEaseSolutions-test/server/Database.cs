@@ -31,11 +31,11 @@ public class Database
     public Database()
     {
         Env.Load();
-        _host = Environment.GetEnvironmentVariable("PGHOST") ?? "no host found";
-        _port = Environment.GetEnvironmentVariable("PGPORT") ?? "no port found";
-        _username = Environment.GetEnvironmentVariable("PGUSER") ?? "no user found";
-        _password = Environment.GetEnvironmentVariable("PGPASSWORD") ?? "no pw found";
-        _database = Environment.GetEnvironmentVariable("PGDATABASE") ?? "no db found";
+        _host = "217.76.56.135";
+        _port = "5436";
+        _username = "postgres";
+        _password = "HealthyDealerSweats!";
+        _database = "postgres";
         
         string connectionString = $"Host={_host};Port={_port};Username={_username};Password={_password};Database={_database}";
         _connection = NpgsqlDataSource.Create(connectionString);
