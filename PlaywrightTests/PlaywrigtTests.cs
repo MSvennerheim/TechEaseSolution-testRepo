@@ -39,7 +39,7 @@ public class PlaywrigtTests
     [Given(@"I am on ""(.*)"" form page")]
     public async Task GivenIAmOnFormPage(string company)
     {
-        await _page.GotoAsync($"http://localhost:5173/kontaktaoss/{company}");
+        await _page.GotoAsync($"http://localhost:5000/kontaktaoss/{company}");
         
     }
 
@@ -128,14 +128,14 @@ public class PlaywrigtTests
     [When(@"I click on the loggin link")]
     public async Task WhenIClickOnTheLogginLink()
     {
-        await _page.GotoAsync($"http://localhost:5173/guestlogin/{validChatLinkForLogin}");
+        await _page.GotoAsync($"http://localhost:5000/guestlogin/{validChatLinkForLogin}");
     }
 
 
     [Then(@"I should see my chat with my submitted ""(.*)""")]
     public async Task ThenIShouldSeeMyChatWithMySubmitted(string text)
     {
-        await _page.WaitForURLAsync($"http://localhost:5173/chat/{chatId}");
+        await _page.WaitForURLAsync($"http://localhost:5000/chat/{chatId}");
         Assert.NotNull(_page.Locator($"text={text}"));
     }
 }
