@@ -11,7 +11,7 @@ import EditForm from "./Pages/CaseEditor.jsx";
 import './index.css';
 import ProtectedRoute from './Components/ProtectedRoute.jsx';
 import CustomerLogin from "./Components/CustomerLogin.jsx";
-import Redigeramall from "./Pages/Redigeramall.jsx";
+import Redigeramall from "./Pages/redigeramall.jsx";
 
 export default function App() {
   return (
