@@ -45,6 +45,8 @@ app.UseRouting(); // aktiverar routing för API-endpoints
 app.UseAuthentication(); // Aktiverar autentisering
 app.UseAuthorization();  // aktiverar behörighetshantering
 app.UseMiddleware<AuthMiddleware>();  // Detta är min egna middleware för autentisering 
+app.UseDefaultFiles();
+app.UseStaticFiles();
 
 
 
