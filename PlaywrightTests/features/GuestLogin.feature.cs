@@ -86,45 +86,6 @@ namespace PlaywrightTests.Features
             await this.TestTearDownAsync();
         }
         
-        [Xunit.SkippableTheoryAttribute(DisplayName="login and access chat")]
-        [Xunit.TraitAttribute("FeatureTitle", "access chat as customer")]
-        [Xunit.TraitAttribute("Description", "login and access chat")]
-        [Xunit.InlineDataAttribute("Testcompany", "TestCustomer1@email", "Testcase 1", "issue customer 1, company 1, login", new string[0])]
-        [Xunit.InlineDataAttribute("Testcompany2", "TestCustomer1@email", "Testcase 3", "issue customer 1, company 2, login", new string[0])]
-        [Xunit.InlineDataAttribute("Testcompany", "TestCustomer2@email", "Testcase 2", "issue customer 2, company 1, login", new string[0])]
-        [Xunit.InlineDataAttribute("Testcompany2", "TestCustomer3@email", "Testcase 3", "issue customer 3, company 2, login", new string[0])]
-        public async System.Threading.Tasks.Task LoginAndAccessChat(string company, string email, string issue, string text, string[] exampleTags)
-        {
-            string[] tagsOfScenario = exampleTags;
-            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            argumentsOfScenario.Add("company", company);
-            argumentsOfScenario.Add("email", email);
-            argumentsOfScenario.Add("issue", issue);
-            argumentsOfScenario.Add("text", text);
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("login and access chat", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 3
-this.ScenarioInitialize(scenarioInfo);
-#line hidden
-            if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
-            {
-                testRunner.SkipScenario();
-            }
-            else
-            {
-                await this.ScenarioStartAsync();
-#line 4
-    await testRunner.GivenAsync(string.Format("I have submitted a form, with relevant info, \"{0}\", \"{1}\", \"{2}\" and \"{3}\"", company, email, issue, text), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line hidden
-#line 5
-    await testRunner.WhenAsync("I click on the loggin link", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line hidden
-#line 6
-    await testRunner.ThenAsync(string.Format("I should see my chat with my submitted \"{0}\"", text), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line hidden
-            }
-            await this.ScenarioCleanupAsync();
-        }
-        
         [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "4.0.0.0")]
         [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
         public class FixtureData : object, Xunit.IAsyncLifetime

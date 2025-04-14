@@ -82,7 +82,7 @@ public class PlaywrigtTests
     [Given(@"I am on the loggin page")]
     public async Task GivenIAmOnTheLogginPage()
     {
-        await _page.GotoAsync("http://localhost:5000/");
+        await _page.GotoAsync("http://localhost:5000/login");
     }
 
     [When(@"I input ""(.*)"" in the password textbox")]
