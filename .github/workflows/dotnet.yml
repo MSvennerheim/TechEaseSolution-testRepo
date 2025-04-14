@@ -29,12 +29,6 @@ jobs:
         run: cd PlaywrightTests && pwsh bin/Debug/net8.0/playwright.ps1 install --with-deps
       - name: Start server
         run: cd TechEaseSolutions-test/server && nohup dotnet run &
-      - name: Wait for server to be ready
-        run: |
-          until curl -sSf http://localhost:5000 > /dev/null; do
-          echo "Waiting for server..."
-          sleep 2
-           done
       - name: Run GUI-tests
         run: cd PlaywrightTests && dotnet test
 
