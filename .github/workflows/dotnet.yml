@@ -18,7 +18,7 @@ jobs:
         with:
           dotnet-version: 8.0.x
       - name: Install dotnet project dependencies
-        run: cd TechEaseSolutions-test && dotnet restore
+        run: cd ../TechEaseSolutions-test && dotnet restore
       - name: Build/Restore Playwright Project
         run: cd PlaywirghtTests && dotnet build
       - name: Ensure browsers are installed
