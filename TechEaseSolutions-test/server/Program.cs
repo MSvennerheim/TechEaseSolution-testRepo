@@ -47,6 +47,7 @@ app.UseAuthorization();  // aktiverar behörighetshantering
 app.UseMiddleware<AuthMiddleware>();  // Detta är min egna middleware för autentisering 
 app.UseDefaultFiles();
 app.UseStaticFiles();
+app.UseRouting();
 app.MapFallbackToFile("index.html");
 
 
