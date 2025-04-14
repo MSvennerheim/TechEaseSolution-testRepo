@@ -6,6 +6,11 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+<Target Name="BuildFrontend" BeforeTargets="Build">
+  <Exec Command="npm i" WorkingDirectory="$(ProjectDir)../client" />
+  <Exec Command="npm run build" WorkingDirectory="$(ProjectDir)../client" />
+</Target>
+
   <ItemGroup>
     <PackageReference Include="DotNetEnv" Version="3.1.1" />
     <PackageReference Include="MailKit" Version="4.10.0" />
