@@ -26,6 +26,9 @@ public class PlaywrigtTests
         _context = await _browser.NewContextAsync();
         _page = await _context.NewPageAsync();
         _testService = new TestService();
+        
+        _page.SetDefaultTimeout(120000); // let's see if this fixes anything
+
     }
 
     [AfterScenario]
