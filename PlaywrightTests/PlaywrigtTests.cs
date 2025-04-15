@@ -156,7 +156,7 @@ public class PlaywrigtTests
         await _page.GotoAsync("http://localhost:5000/login");
         await _page.FillAsync("input[id='email']", email);
         await _page.FillAsync("input[id='password']", password);
-        await _page.WaitForURLAsync(url => url.Contains("arbetarsida"));
+        await _page.WaitForURLAsync(url => url.Contains("arbetarsida") || url.Contains("admin"));
     }
 
     [Given(@"clicked the button to get to their chat")]
@@ -183,5 +183,44 @@ public class PlaywrigtTests
     public async Task ThenIShouldBeRedirectedToANewChatOrToTheArbetarsida()
     {
         await _page.WaitForURLAsync(url => !url.Contains($"/Chat/{chatId}"));
+        // edgecase here that it'll fail in case of url changing from example /Chat/2 to /Chat/21 
+    }
+
+    [When(@"I click on the chat I want to assign myself and I'm sent to the chatpage")]
+    public async Task WhenIClickOnTheChatIWantToAssignMyself()
+    {
+        var ParrentElement = _page.Locator($"a[href='/Chat/{chatId}']").Locator("..");
+        var AssignTicketButton = ParrentElement.Locator("button[textcontent='Go to chat and assign ticket']");
+        AssignTicketButton.ClickAsync();
+        await _page.WaitForURLAsync(url => !url.Contains($"/Chat/{chatId}"));
+    }
+
+    [When(@"I go back to the arbetarsida")]
+    public async Task WhenIGoBackToTheArbetarsida()
+    {
+        await _page.GotoAsync("http://localhost:5000/arbetarsida");
+    }
+
+    [Then(@"I should not see my assigned chat in the list")]
+    public async Task ThenIShouldNotSeeMyAssignedChatInTheList()
+    {
+        var assignedChat = _page.Locator($"a[href='/Chat/{chatId}']");
+        int timesChatAppears = await assignedChat.CountAsync();
+        
+        Assert.Equal(0, timesChatAppears);
+    }
+
+    [Then(@"I should see my assigned chat with my email, ""(.*)"", if i check the show all chats checkbox")]
+    public async Task ThenIShouldSeeMyAssignedChatWithMyEmailIfICheckTheShowAllChatsCheckbox(string email)
+    {
+        await _page.CheckAsync("input[type='checkbox']"); //  works for this but I don't really like it
+        
+        var ParrentElement = _page.Locator($"a[href='/Chat/{chatId}']").Locator("../..");
+        int timesChatAppears = await ParrentElement.CountAsync();
+        Assert.NotEqual(1,timesChatAppears);
+        
+        int amIassigned = await ParrentElement.Locator($"small:has-text(\"{email}\")").CountAsync();
+        Assert.Equal(1, amIassigned);
+       
     }
 }
