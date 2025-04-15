@@ -135,5 +135,53 @@ public class PlaywrigtTests
         Assert.NotNull(_page.Locator($"text={text}"));
     }
 
-   
+
+    [When(@"I input ""(.*)"" in the textbox")]
+    public async Task WhenIInputInTheTextbox(string text)
+    {
+        await _page.FillAsync("input[id='message']", text);
+    }
+
+    [Given(@"I am on my chatpage")]
+    public async Task GivenIAmOnMyChatpage()
+    {
+        await _page.GotoAsync($"http://localhost:5000/guestlogin/{validChatLinkForLogin}");
+        await _page.WaitForURLAsync($"http://localhost:5000/chat/{chatId}");
+    }
+
+
+    [Given(@"I am logged in with my credentials, ""(.*)"", ""(.*)""")]
+    public async Task GivenIAmLoggedInWithMyCredentials(string email, string password)
+    {
+        await _page.GotoAsync("http://localhost:5000/login");
+        await _page.FillAsync("input[id='email']", email);
+        await _page.FillAsync("input[id='password']", password);
+        await _page.WaitForURLAsync(url => url.Contains("arbetarsida"));
+    }
+
+    [Given(@"clicked the button to get to their chat")]
+    public async Task GivenClickedTheLinkToGetToTheirChat()
+    {
+        await _page.ClickAsync($"a[href='/Chat/{chatId}']");
+        await _page.WaitForURLAsync(url => url.Contains($"/Chat/{chatId}"));
+    }
+    
+    [When(@"I submit the form with the send button")]
+    public async Task WhenISubmitTheFormWithTheSendButton()
+    {
+        await _page.ClickAsync("button[textcontent='Send']");
+    }
+
+    [When(@"I submit the form with the Send and take next open ticket button")]
+    public async Task WhenISubmitTheFormWithTheSendAndTakeNextOpenTicketButton()
+    {
+        await _page.ClickAsync("button[textcontent='Send and take next open ticket']");
+    }
+
+
+    [Then(@"I should be redirected to a new chat or to the arbetarsida")]
+    public async Task ThenIShouldBeRedirectedToANewChatOrToTheArbetarsida()
+    {
+        await _page.WaitForURLAsync(url => !url.Contains($"/Chat/{chatId}"));
+    }
 }
