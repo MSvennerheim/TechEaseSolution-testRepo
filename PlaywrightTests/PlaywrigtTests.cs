@@ -42,7 +42,7 @@ public class PlaywrigtTests
     [Given(@"I am on ""(.*)"" form page")]
     public async Task GivenIAmOnFormPage(string company)
     {
-        await _page.GotoAsync($"http://localhost:5000/kontaktaoss/{company}");
+        await _page.GotoAsync($"http://localhost:5000/kontaktaoss/{company}", new PageGotoOptions { WaitUntil = WaitUntilState.NetworkIdle });
         
     }
 
@@ -85,7 +85,7 @@ public class PlaywrigtTests
     [Given(@"I am on the loggin page")]
     public async Task GivenIAmOnTheLogginPage()
     {
-        await _page.GotoAsync("http://localhost:5000/login");
+        await _page.GotoAsync("http://localhost:5000/login", new PageGotoOptions { WaitUntil = WaitUntilState.NetworkIdle });
     }
 
     [When(@"I input ""(.*)"" in the password textbox")]
@@ -127,7 +127,7 @@ public class PlaywrigtTests
     [When(@"I click on the loggin link")]
     public async Task WhenIClickOnTheLogginLink()
     {
-        await _page.GotoAsync($"http://localhost:5000/guestlogin/{validChatLinkForLogin}");
+        await _page.GotoAsync($"http://localhost:5000/guestlogin/{validChatLinkForLogin}", new PageGotoOptions { WaitUntil = WaitUntilState.NetworkIdle });
     }
 
 
@@ -148,7 +148,7 @@ public class PlaywrigtTests
     [Given(@"I am on my chatpage")]
     public async Task GivenIAmOnMyChatpage()
     {
-        await _page.GotoAsync($"http://localhost:5000/guestlogin/{validChatLinkForLogin}");
+        await _page.GotoAsync($"http://localhost:5000/guestlogin/{validChatLinkForLogin}", new PageGotoOptions { WaitUntil = WaitUntilState.NetworkIdle });
         await _page.WaitForURLAsync($"http://localhost:5000/chat/{chatId}");
     }
 
@@ -156,7 +156,7 @@ public class PlaywrigtTests
     [Given(@"I am logged in with my credentials, ""(.*)"", ""(.*)""")]
     public async Task GivenIAmLoggedInWithMyCredentials(string email, string password)
     {
-        await _page.GotoAsync("http://localhost:5000/login");
+        await _page.GotoAsync("http://localhost:5000/login", new PageGotoOptions { WaitUntil = WaitUntilState.NetworkIdle });
         await _page.FillAsync("input[id='email']", email);
         await _page.FillAsync("input[id='password']", password);
         await _page.WaitForURLAsync(url => url.Contains("arbetarsida") || url.Contains("admin"));
@@ -201,7 +201,7 @@ public class PlaywrigtTests
     [When(@"I go back to the arbetarsida")]
     public async Task WhenIGoBackToTheArbetarsida()
     {
-        await _page.GotoAsync("http://localhost:5000/arbetarsida");
+        await _page.GotoAsync("http://localhost:5000/arbetarsida", new PageGotoOptions { WaitUntil = WaitUntilState.NetworkIdle });
     }
 
     [Then(@"I should not see my assigned chat in the list")]
