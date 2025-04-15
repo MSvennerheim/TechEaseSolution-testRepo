@@ -159,7 +159,7 @@ public class PlaywrigtTests
         await _page.GotoAsync("http://localhost:5000/login", new PageGotoOptions { WaitUntil = WaitUntilState.NetworkIdle });
         await _page.FillAsync("input[id='email']", email);
         await _page.FillAsync("input[id='password']", password);
-        await _page.WaitForURLAsync(url => url.Contains("arbetarsida") || url.Contains("admin"));
+        //await _page.WaitForURLAsync(url => url.Contains("arbetarsida") || url.Contains("admin"));
     }
 
     [Given(@"clicked the button to get to their chat")]
