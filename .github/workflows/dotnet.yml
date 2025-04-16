@@ -31,7 +31,30 @@ jobs:
         run: cd TechEaseSolutions-test/server && nohup dotnet run &
       - name: Run GUI-tests
         run: cd PlaywrightTests && dotnet test
-
+        
+  api_tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Setup dotnet
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+      - name: Install Newman
+        run: npm install -g newman
+      - name: Install dotnet project dependencies
+        run: cd TechEaseSolutions-test && dotnet restore
+      - name: Build
+        run: cd TechEaseSolutions-test && dotnet build
+      - name: Start Server
+        run: cd TechEaseSolutions-test/server && nohup dotnet run &
+      - name: Run API-Tests
+        run: cd PostmanTests && newman run "TechEaseSolutions API-testing.postman_collection.json"
+        
   deploy:
     name: Deploy to Server
     runs-on: ubuntu-latest
@@ -47,5 +70,3 @@ jobs:
           script: |
             cd /srv/www/malmo/max 
             git clone https://github.com/MSvennerheim/TechEaseSolution-testRepo.git 
-
-
