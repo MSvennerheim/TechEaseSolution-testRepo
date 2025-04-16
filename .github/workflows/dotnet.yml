@@ -32,20 +32,20 @@ jobs:
       - name: Run GUI-tests
         run: cd PlaywrightTests && dotnet test
 
-deploy:
-  name: Deploy to Server
-  runs-on: ubuntu-latest
-  #needs: [api_tests, gui_tests] # Kör endast om alla tidigare tester är OK
-  steps:
-    - name: Deploy App
-      uses: appleboy/ssh-action@v1.2.0
-      with:
-        host: ${{ secrets.HOST }}
-        username: ${{ secrets.USERNAME }}
-        password: ${{ secrets.PASSWORD }}
-        port: ${{ secrets.PORT }}
-        script: |
-          cd /srv/www/malmo/max 
-          git clone https://github.com/MSvennerheim/TechEaseSolution-testRepo.git 
+  deploy:
+    name: Deploy to Server
+    runs-on: ubuntu-latest
+    #needs: [api_tests, gui_tests] # Kör endast om alla tidigare tester är OK
+    steps:
+      - name: Deploy App
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          port: ${{ secrets.PORT }}
+          script: |
+            cd /srv/www/malmo/max 
+            git clone https://github.com/MSvennerheim/TechEaseSolution-testRepo.git 
 
 
