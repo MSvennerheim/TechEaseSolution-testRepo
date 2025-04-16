@@ -173,13 +173,13 @@ public class PlaywrigtTests
     [When(@"I submit the form with the send button")]
     public async Task WhenISubmitTheFormWithTheSendButton()
     {
-        await _page.ClickAsync("button[textcontent='Send']");
+        await _page.ClickAsync("button:has-text('Send')");
     }
 
     [When(@"I submit the form with the Send and take next open ticket button")]
     public async Task WhenISubmitTheFormWithTheSendAndTakeNextOpenTicketButton()
     {
-        await _page.ClickAsync("button[textcontent='Send and take next open ticket']");
+        await _page.ClickAsync("button:has-text('Send and take next open ticket')");
     }
 
 
@@ -203,6 +203,7 @@ public class PlaywrigtTests
     [When(@"I go back to the arbetarsida")]
     public async Task WhenIGoBackToTheArbetarsida()
     {
+        await Task.Delay(1000); // give it some time to assign in backend before going back
         await _page.GotoAsync("http://localhost:5000/arbetarsida", new PageGotoOptions { WaitUntil = WaitUntilState.NetworkIdle });
     }
 
@@ -227,7 +228,7 @@ public class PlaywrigtTests
         int timesChatAppears = await ParrentElement.CountAsync();
         Assert.NotEqual(1,timesChatAppears);
         
-        int amIassigned = await ParrentElement.Locator($"small:has-text(\"{email}\")").CountAsync();
+        int amIassigned = await ParrentElement.Locator($"small:has-text('{email}')").CountAsync();
         Assert.Equal(1, amIassigned);
        
     }
@@ -269,7 +270,7 @@ public class PlaywrigtTests
     [When(@"I see their email ""(.*)"" as a new employee")]
     public async Task WhenISeeTheirEmailAsANewEmployee(string email)
     {
-        await _page.WaitForSelectorAsync($"*:has-text('{email}')");
+        await _page.WaitForSelectorAsync($"p[value='{email}'])");
     }
 
 
