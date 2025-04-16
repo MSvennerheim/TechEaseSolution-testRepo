@@ -193,7 +193,8 @@ public class PlaywrigtTests
     [When(@"I click on the chat I want to assign myself and I'm sent to the chatpage")]
     public async Task WhenIClickOnTheChatIWantToAssignMyself()
     {
-        var ParrentElement = _page.Locator($"a[href='/Chat/{chatId}']").Locator("..");
+        var chatLinkLocator = _page.Locator($"a[href='/Chat/{chatId}']");
+        var ParrentElement = chatLinkLocator.Locator("..");
         var AssignTicketButton = ParrentElement.Locator("button[textcontent='Go to chat and assign ticket']");
         AssignTicketButton.ClickAsync();
         await _page.WaitForURLAsync(url => !url.Contains($"/Chat/{chatId}"));
@@ -218,13 +219,72 @@ public class PlaywrigtTests
     public async Task ThenIShouldSeeMyAssignedChatWithMyEmailIfICheckTheShowAllChatsCheckbox(string email)
     {
         await _page.CheckAsync("input[type='checkbox']"); //  works for this but I don't really like it
-        
-        var ParrentElement = _page.Locator($"a[href='/Chat/{chatId}']").Locator("../..");
+
+        var chatLinkLocator = _page.Locator($"a[href='/Chat/{chatId}']");
+        await chatLinkLocator.WaitForAsync(new() { State = WaitForSelectorState.Attached });
+
+        var ParrentElement = chatLinkLocator.Locator("../..");
         int timesChatAppears = await ParrentElement.CountAsync();
         Assert.NotEqual(1,timesChatAppears);
         
         int amIassigned = await ParrentElement.Locator($"small:has-text(\"{email}\")").CountAsync();
         Assert.Equal(1, amIassigned);
        
+    }
+
+    [Given(@"I click on the employees button")]
+    public async Task GivenIClickOnTheManageEmployeesButton()
+    {
+        await _page.ClickAsync("a[href='/redigeramedarbetare']");
+    }
+
+    [When(@"I see the employee site")]
+    public async Task WhenISeeTheEmployeeSite()
+    {
+        await _page.WaitForURLAsync(url => url.Contains("/redigeramedarbetare"));
+    }
+
+
+
+
+    [When(@"I click the add employee button and see the popup")]
+    public async Task WhenIClickTheAddEmployeeButtonAndSeeThePopup()
+    {
+        await _page.ClickAsync("div[class='addEmployee']");
+        await _page.WaitForSelectorAsync("div[id='newCoworker']");
+    }
+
+    [When(@"I enter their email ""(.*)""")]
+    public async Task WhenIEnterTheirEmail(string email)
+    {
+        await _page.FillAsync("input[id='Email']", email);
+    }
+    
+    [Then(@"I should see their email ""(.*)"" as a new employee")]
+    public async Task ThenIShouldSeeTheirEmailAsANewEmployee(string email)
+    {
+        await _page.WaitForSelectorAsync($"*:has-text('{email}')");
+    }
+
+    [When(@"I see their email ""(.*)"" as a new employee")]
+    public async Task WhenISeeTheirEmailAsANewEmployee(string email)
+    {
+        await _page.WaitForSelectorAsync($"*:has-text('{email}')");
+    }
+
+
+    [When(@"I click on the remove coworker button for ""(.*)""")]
+    public async Task WhenIClickOnTheRemoveCoworkerButtonFor(string email)
+    {
+        var textElement =  _page.Locator($"p[value='{email}']");
+        var parrentElement = textElement.Locator("..");
+        var button = parrentElement.Locator("button");
+        await button.ClickAsync();
+    }
+
+    [Then(@"I should not see the coworkers email ""(.*)""")]
+    public async Task ThenIShouldNotSeeTheCoworkersEmail(string email)
+    {
+        await _page.WaitForSelectorAsync($"*:has-text('{email}')", new() { State = WaitForSelectorState.Detached });
     }
 }
