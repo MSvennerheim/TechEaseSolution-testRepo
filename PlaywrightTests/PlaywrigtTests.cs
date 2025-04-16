@@ -270,7 +270,7 @@ public class PlaywrigtTests
     [When(@"I see their email ""(.*)"" as a new employee")]
     public async Task WhenISeeTheirEmailAsANewEmployee(string email)
     {
-        await _page.WaitForSelectorAsync($"p[value='{email}'])");
+        await _page.WaitForSelectorAsync($"p[value='{email}']");
     }
 
 
